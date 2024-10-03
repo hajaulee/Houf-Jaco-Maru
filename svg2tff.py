@@ -61,11 +61,13 @@ def main(config_file):
     os.chdir(os.path.dirname(config_file) or '.')
     font = fontforge.font()
     setProperties(font, config)
+    
+    print("Adding glyphs...")
     addGlyphs(font, config)
     for outfile in config['output']:
-        sys.stderr.write('Generating %s...\n' % outfile)
+        sys.stdout.write('Generating %s...\n' % outfile)
         font.generate(outfile)
-        sys.stderr.write('Generated %s...\n' % outfile)
+        sys.stdout.write('Generated %s.\n' % outfile)
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
